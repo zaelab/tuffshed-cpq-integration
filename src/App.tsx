@@ -1,10 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import viteLogo from "./assets/vite.svg";
+import "./App.css";
+
+declare global {
+  interface Window {
+    threekitPlayer: (config: unknown) => void;
+  }
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://preview.threekit.com/app/js/threekit-player.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = async () => {
+      const config = {
+        initialConfiguration: {},
+        authToken: "4b31a923-4378-4185-b01e-d8f602bbfdf0",
+        assetId: "4c4e2ff0-76a5-4b8b-af85-60ed5f5bc35d",
+        el: document.getElementById("player"),
+        showAR: true,
+        cache: {
+          // maxAge: 5000, //milliseconds
+          scope: "v1.0",
+        },
+      };
+
+      window.threekitPlayer(config);
+    };
+  }, []);
 
   return (
     <>
@@ -12,24 +39,16 @@ function App() {
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Test React - CPQ integration</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div id="player"></div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
