@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC, useEffect, useState } from "react";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
 
@@ -8,30 +9,22 @@ declare global {
   }
 }
 
-function App() {
+const App: FC<{ threekitPlayer: any }> = ({ threekitPlayer }) => {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://preview.threekit.com/app/js/threekit-player.js";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    document.body.appendChild(script);
-
-    script.onload = async () => {
-      const config = {
-        initialConfiguration: {},
-        authToken: "4b31a923-4378-4185-b01e-d8f602bbfdf0",
-        assetId: "4c4e2ff0-76a5-4b8b-af85-60ed5f5bc35d",
-        el: document.getElementById("player"),
-        showAR: true,
-        cache: {
-          // maxAge: 5000, //milliseconds
-          scope: "v1.0",
-        },
-      };
-
-      window.threekitPlayer(config);
+    const config = {
+      initialConfiguration: {},
+      authToken: "4b31a923-4378-4185-b01e-d8f602bbfdf0",
+      assetId: "4c4e2ff0-76a5-4b8b-af85-60ed5f5bc35d",
+      el: document.getElementById("player"),
+      showAR: true,
+      cache: {
+        // maxAge: 5000, //milliseconds
+        scope: "v1.0",
+      },
     };
+
+    threekitPlayer(config);
   }, []);
 
   return (
@@ -50,6 +43,6 @@ function App() {
       <div id="player"></div>
     </>
   );
-}
+};
 
 export default App;
