@@ -14,6 +14,7 @@ function App() {
     const script = document.createElement("script");
     script.src = "https://preview.threekit.com/app/js/threekit-player.js";
     script.async = true;
+    script.crossOrigin = "anonymous";
     document.body.appendChild(script);
 
     script.onload = async () => {
