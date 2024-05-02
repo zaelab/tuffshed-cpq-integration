@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
 
@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const App: FC<{ threekitPlayer: any }> = ({ threekitPlayer }) => {
+const App = () => {
   const [count, setCount] = useState(0);
   useEffect(() => {
     const config = {
@@ -24,7 +24,7 @@ const App: FC<{ threekitPlayer: any }> = ({ threekitPlayer }) => {
       },
     };
 
-    threekitPlayer(config);
+    window.threekitPlayer(config);
   }, []);
 
   return (
