@@ -3,9 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-const elements = document.getElementsByClassName("threekit-root");
-ReactDOM.createRoot(elements[0]).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(window as any).mount = (el: HTMLDivElement) => {
+  ReactDOM.createRoot(el).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+};
