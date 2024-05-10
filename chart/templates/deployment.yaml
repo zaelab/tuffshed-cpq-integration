@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.project }}
+  namespace: immersive
+  labels:
+    app: {{ .Values.project }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.project }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.project }}
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: {{ .Values.project }}
+          image: {{ .Values.ECRrepo }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.defaultPort }}

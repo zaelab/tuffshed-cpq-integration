@@ -1,0 +1,4 @@
+apiVersion : v3
+name       : immersive
+description: Helm chart for deploy immersive
+version    : 1.0
