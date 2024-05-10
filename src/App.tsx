@@ -33,6 +33,18 @@ const App = () => {
     load(config);
   }, []);
 
+  useEffect(() => {
+    const onCustomEvent = (data: unknown) => {
+      console.log("on custom event handler ", data);
+    };
+
+    window.addEventListener("cpq-custom-event", onCustomEvent);
+
+    return () => {
+      window.removeEventListener("cpq-custom-event", onCustomEvent);
+    };
+  }, []);
+
   return (
     <>
       <div>
