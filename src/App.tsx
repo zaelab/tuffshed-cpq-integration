@@ -9,7 +9,6 @@ declare global {
   }
 }
 
-// window.mount(document.getElementsByClassName("threekit-root")[0])
 const App = () => {
   const [count, setCount] = useState(0);
   const load = async (config: any) => {
@@ -40,8 +39,8 @@ const App = () => {
 
     window.onmessage = onCustomMessage;
 
-    if (window.top) {
-      window.top.postMessage("message", "content from iframe");
+    if (window.top && window.top.postMessage) {
+      window.top.postMessage("message", "*");
     }
   }, []);
 
