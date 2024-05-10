@@ -34,15 +34,15 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const onCustomEvent = (data: unknown) => {
-      console.log("on custom event handler ", data);
+    const onCustomMessage = (data: unknown) => {
+      console.log("on custom message handler ", data);
     };
 
-    window.addEventListener("cpq-custom-event", onCustomEvent);
+    window.onmessage = onCustomMessage;
 
-    return () => {
-      window.removeEventListener("cpq-custom-event", onCustomEvent);
-    };
+    if (window.top) {
+      window.top.postMessage("message", "content from iframe");
+    }
   }, []);
 
   return (
