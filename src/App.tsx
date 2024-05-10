@@ -13,21 +13,13 @@ declare global {
 const App = () => {
   const [count, setCount] = useState(0);
   const load = async (config: any) => {
-    try {
-      console.log("in try 1");
-      await window.threekitPlayer(config);
-      console.log("in try 2");
-    } catch (e: any) {
-      console.log("in catch");
-      console.error(e);
-      console.log(e.message);
-    }
+    await window.threekitPlayer(config);
   };
 
   useEffect(() => {
     const config = {
       initialConfiguration: {},
-      authToken: "4bbe7669-d9af-4040-b450-2778b977627e",
+      authToken: "1dedc1c4-2b7f-4997-9c09-f040e7e0a92a",
       assetId: "4c4e2ff0-76a5-4b8b-af85-60ed5f5bc35d",
       el: window.document.getElementById("player"),
       showAR: true,
