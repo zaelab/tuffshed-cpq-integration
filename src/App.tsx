@@ -27,19 +27,25 @@ const App = () => {
       },
     };
 
-    console.log("root element", window.document.getElementById("player"));
-
     load(config);
   }, []);
 
   useEffect(() => {
-    const onCustomMessage = (data: unknown) => {
-      console.log("on custom message handler ", data);
+    const onCustomMessage = (data: any) => {
+      if (data?.data?.type === "message") {
+        console.log(
+          "on custom message handler ",
+          data?.data?.type,
+          data?.data?.message
+        );
+      }
     };
 
+    console.log("subsribe to custom messages");
     window.onmessage = onCustomMessage;
 
     if (window.top && window.top.postMessage) {
+      console.log("send custom message to top window");
       window.top.postMessage("message", "*");
     }
   }, []);
